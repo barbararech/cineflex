@@ -6,6 +6,8 @@ body{
     margin-top: 67px;
     padding: 0 30px;
     background-color: #ffffff;
+    display: flex;
+    justify-content: center;
 }
 p{
     font-family: 'Roboto';
@@ -24,11 +26,14 @@ img {
     background-color: #ffffff;
     padding: 8px;
     box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
 }
 
 .gridContainer{
-    gap: 11px 30px;
-    width: 100%;
+    overflow-x: hidden;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2,2fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+    width: 100%;
 }
