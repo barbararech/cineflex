@@ -5,9 +5,8 @@ import '../App/style.css';
 import Header from "../Header/Header";
 import SelectMovie from "../SelectMovie/SelectMovie";
 import SelectShowtime from "../SelectShowtime/SelectShowtime";
-// import SelectSession from "../SelectSession/SelectSession";
-// import SuccessScreen from "../SuccessScreen/SuccessScreen";
-// import Footer from "../Footer/Footer";
+import SelectSession from "../SelectSession/SelectSession";
+import SuccessScreen from "../SuccessScreen/SuccessScreen";
 
 
 export default function App() {
@@ -17,10 +16,9 @@ export default function App() {
        <Routes>
         <Route path="/" element={<SelectMovie />} />
         <Route path="/filme/id" element={<SelectShowtime />} />
-        {/* <Route path="/sessao/id" element={<SelectSession />} />
-        <Route path="/sucesso" element={<SuccessScreen />} />  */}
+         <Route path="/sessao/id" element={<SelectSession />} />
+        <Route path="/sucesso" element={<SuccessScreen />} />  
       </Routes>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

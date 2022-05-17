@@ -9,8 +9,9 @@ body{
     display: flex;
     justify-content: center;
 }
+
 p{
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 24px;
     color: #293845;
@@ -33,7 +34,15 @@ img {
     overflow-x: hidden;
     display: grid;
     grid-template-columns: repeat(2,2fr);
-    grid-column-gap: 30px;
     grid-row-gap: 10px;
-    width: 100%;
+    width: 420px;
+    justify-items: center;
+  align-items: center;
+}
+
+.containerSelectMovie {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

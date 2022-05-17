@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./style.css";
 import Footer from "../Footer/Footer";
 
-export default function SelectMovie(){
+export default function SelectShowtime(){
     return(
         <>
             <p>Selecione o horário</p>

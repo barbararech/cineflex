@@ -1,0 +1,99 @@
+.containerSelectSession{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.buttonsSeat{
+    width: 340px;
+}
+
+.buttonsSeat button, .buttonLabel button{
+    width: 26px;
+    height: 26px;
+    background-color: #C3CFD9;
+    border: 1px solid #808F9D;
+    border-radius: 17px;
+    margin: 9px 4px;
+    cursor: pointer;
+}
+
+.buttonLabel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.buttonLabel .selected{
+    background-color:#8DD7CF;
+    border: 1px solid #1AAE9E;
+}
+
+.buttonLabel  .unavailable{
+    background-color:#FBE192;
+    border: 1px solid #F7C52B;
+}
+
+.label{
+    width:96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 45px;
+}
+
+.label span{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 13x;
+    color: #4e5a65;
+}
+
+.infoCostumer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoCostumer span{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18x;
+    color: #293845;
+    width: 327px;
+    align-items: flex-start;
+}
+
+input{
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 3px;
+    outline:none;
+    width: 327px;
+    height: 50px;
+    margin: 4px 0px 8px 0px;
+}
+
+input::placeholder{
+    color: #AFAFAF;
+    opacity: 1;
+    font-style: italic;
+}
+
+.bookSeat{
+    width: 225px;
+    height: 42px;
+    background-color:#E8833A;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    margin-top: 57px;
+    cursor: pointer;
+}

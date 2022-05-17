@@ -6,7 +6,7 @@
 }
 
 .containerSelectShowtime p{
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 24px;
     color: #293845;
@@ -18,7 +18,7 @@
 }
 
 .containerSelectShowtime span{
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     color:#293845;
 
@@ -30,10 +30,11 @@
     background-color:#E8833A;
     border: none;
     border-radius: 3px;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     color: #ffffff;
-    margin: 22px 4px ;
+    margin: 22px 4px;
+    cursor: pointer;
 }
 
 
