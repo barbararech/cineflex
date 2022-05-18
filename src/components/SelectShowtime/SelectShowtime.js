@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 export default function SelectShowtime(){
     return(
         <>
-            <p>Selecione o horário</p>
+            <h5>Selecione o horário</h5>
             <div className="containerSelectShowtime">
                  <span>Quinta-Feira - 24/06/2021</span>
                  <div className="buttonsHour"> 

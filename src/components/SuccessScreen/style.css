@@ -1,0 +1,45 @@
+.containerSuccessScreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoSuccess{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.containerSuccessScreen h5{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #247A6B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+    width: 150px;
+    text-align: center;
+}
+
+.infoSuccess p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color:#293845;
+    margin-top: 45px;
+    margin-bottom: 10px;
+}
+.infoSuccess p:first-child{
+    margin-top: 0px;
+}
+
+.infoSuccess span{
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color:#293845;
+    margin-bottom: 5px;
+}

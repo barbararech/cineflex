@@ -6,7 +6,7 @@ export default function SelectMovie(){
     return(
         <>
             <div className="containerSelectMovie">
-                <p>Selecione o filme</p>
+                <h5>Selecione o filme</h5>
                 <div className="gridContainer">
                     <Link to="/filme/id">
                         <img src={movie} alt="movieBanner" /> 

@@ -50,7 +50,7 @@ export default function SelectSession(){
 
     return(
         <>
-            <p>Selecione o(s) assento(s)</p>
+            <h5>Selecione o(s) assento(s)</h5>
             <div className="containerSelectSession">
                 <div className="buttonsSeat"> 
                     {buttonSeat}
