@@ -56,7 +56,7 @@ export default function SelectSession(){
                     {buttonSeat}
                 </div>
                 <div className="buttonLabel"> 
-                        {buttonLabel}
+                    {buttonLabel}
                 </div>
                 <div className="infoCostumer">
                     <span>Nome do Comprador:</span>
@@ -64,9 +64,10 @@ export default function SelectSession(){
                     <span>CPF do Comprador:</span>
                     <input type="text" placeholder="Digite seu CPF..." /> 
                 </div> 
-                <Link to="/sucesso">
-                    <button className="bookSeat">Reservar Assento(s)</button> 
-                </Link>
+                    <Link to="/sucesso">
+                        <button className="bookSeat">Reservar Assento(s)</button> 
+                    </Link>
+
             </div> 
         <Footer />
         </>

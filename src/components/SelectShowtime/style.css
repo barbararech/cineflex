@@ -5,14 +5,17 @@
     width:100%;
 }
 
+.containerSelectShowtime{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
 .containerSelectShowtime p{
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 24px;
     color: #293845;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 110px;
 }
 
@@ -20,6 +23,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     color:#293845;
+    width: 100%;
 }
 
 .containerSelectShowtime button{

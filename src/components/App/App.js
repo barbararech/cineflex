@@ -15,8 +15,8 @@ export default function App() {
       <Header />
        <Routes>
         <Route path="/" element={<SelectMovie />} />
-        <Route path="/filme/id" element={<SelectShowtime />} />
-         <Route path="/sessao/id" element={<SelectSession />} />
+        <Route path="/filme/:id" element={<SelectShowtime />} />
+        <Route path="/sessao/:id" element={<SelectSession />} />
         <Route path="/sucesso" element={<SuccessScreen />} />  
       </Routes>
     </BrowserRouter>

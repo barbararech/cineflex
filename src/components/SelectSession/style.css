@@ -1,6 +1,5 @@
 .containerSelectSession{
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
     margin-top: -20px;
@@ -95,5 +94,6 @@ input::placeholder{
     font-size: 18px;
     color: #ffffff;
     margin-top: 57px;
+    margin-bottom: 160px;
     cursor: pointer;
 }
