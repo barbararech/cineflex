@@ -1,35 +1,61 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./style.css";
 import Footer from "../Footer/Footer";
 
+function Showtime({index, days}){
+
+    return(
+        <div className="containerSelectShowtime" key={index}>
+            {days.map(({weekday, date, showtimes})=>{
+                    return(
+                        <>
+                            <span>{weekday} - {date}</span>
+                            <div className="buttonsHour"> 
+                                {showtimes.map(({name, id})=>{
+                                    return(
+                                        <Link to={`/sessao/${id}`}>
+                                            <button>{name}</button> 
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    )
+                })
+            }
+        </div>       
+    )
+}
+
 export default function SelectShowtime(){
+
+    const [movies, setMovies] = useState([]);
+    const  { id }  = useParams();
+
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${id}/showtimes`)
+    
+        promise.then((response) => {
+          setMovies([response.data]);
+        })
+      }, []);
+
+      console.log(movies)
+    const moviesShowtime = movies.map((movie,index) => 
+       ( <Showtime title={movie.title} 
+                  source={movie.posterURL} 
+                  key={index} 
+                  id={movie.id} 
+                  days={movie.days}/>));
+    
+ 
     return(
         <>
             <h5>Selecione o horário</h5>
-            <div className="containerSelectShowtime">
-                 <span>Quinta-Feira - 24/06/2021</span>
-                 <div className="buttonsHour"> 
-                    <Link to="/sessao/id">
-                        <button>15:00</button> 
-                    </Link>
-                    <Link to="/sessao/id">
-                    <button>18:00</button> 
-                    </Link>
-                 </div>
-            </div> 
-            <div className="containerSelectShowtime">
-                 <span>Quinta-Feira - 24/06/2021</span>
-                 <div className="buttonsHour"> 
-                    <Link to="/sessao/id">
-                        <button>15:00</button> 
-                    </Link>
-                    <Link to="/sessao/id">
-                    <button>18:00</button> 
-                    </Link>
-                 </div>
-            </div> 
-            
-        <Footer />
+            {movies.length === 0 ? 'Carregando' : moviesShowtime}        
+            <Footer />
         </>
     )
 }
