@@ -25,12 +25,17 @@
     justify-content: center;
 }
 
-.buttonLabel .selected{
+.containerSelectSession .available{
+    background-color: #C3CFD9;
+    border: 1px solid #808F9D;
+}
+
+.containerSelectSession .selected{
     background-color:#8DD7CF;
     border: 1px solid #1AAE9E;
 }
 
-.buttonLabel  .unavailable{
+.containerSelectSession  .unavailable{
     background-color:#FBE192;
     border: 1px solid #F7C52B;
 }

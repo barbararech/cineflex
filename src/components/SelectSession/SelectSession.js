@@ -4,13 +4,37 @@ import axios from 'axios';
 import "./style.css";
 import Footer from "../Footer/Footer";
 
-function Label(props){
+function Label({index, className, text}){
     return (
         <div className="label">
-            <button key={props.index} className={props.class}></button>
-            <span>{props.text}</span>
+            <button key={index} className={className}></button>
+            <span>{text}</span>
         </div>
     )
+}
+
+function Seats({index, id, isAvailable, name}){
+
+    const [buttonClassName, setButtonClassname] = useState(`${isAvailable ? "available" : "unavailable"}`)
+
+
+    return (
+        <button key={index} className={buttonClassName} id={id} name={name} onClick={()=> {
+            SelectSeats(buttonClassName, setButtonClassname, id);
+            }} > {name} 
+        </button>
+    )
+}
+
+function SelectSeats(buttonClassName, setButtonClassname){
+
+    if (buttonClassName === "available"){
+        setButtonClassname("selected");
+    } 
+    if (buttonClassName === "selected"){
+        setButtonClassname("available");
+    } 
+
 }
 
 export default function SelectSession(){
@@ -18,63 +42,57 @@ export default function SelectSession(){
     const [movieTitle, setMovieTitle] = useState([]);  
     const [movieImg, setMovieImg] = useState([]);  
     const [movieWeekday, setMovieWeekday] = useState([]);  
-    const [movieDate, setMovieDate] = useState([]);  
+    const [movieHour, setMovieHour] = useState([]);  
+    const [movieSeats, setMovieSeats] = useState([]);  
     const [session, setSession] = useState([]);
     const  { id }  = useParams();
 
+    // API
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${id}/seats`)
     
         promise.then((response) => {
           setSession([response.data]);
+          setMovieSeats([...response.data.seats]);
           setMovieTitle(`${response.data.movie.title}`);
           setMovieImg(`${response.data.movie.posterURL}`);
           setMovieWeekday(`${response.data.day.weekday}`);
-          setMovieDate(`${response.data.day.date}`);
+          setMovieHour(`${response.data.name}`);
         })
       }, []);
 
     //  Buttons labels
     const labels = [
         {
-            class: "selected",
+            className: "selected",
             text: "Selecionado"
         },
         {
-            class: "available",
+            className: "available",
             text: "Disponível"
         },
         {
-            class: "unavailable",
+            className: "unavailable",
             text: "Indisponível"
         },
     ] 
 
     const buttonLabel =  labels.map((item, index) => (
-        <Label class={item.class} text={item.text} key={index}/>
+        <Label className={item.className} text={item.text} key={index}/>
     ));
 
-    // Buttons Seats
-    let buttons=[];
-    let i=0;
+    //  Buttons seats
+    const buttonSeat = movieSeats.map((seat, index) => (
+        <Seats key={index} id={seat.id} name={seat.name} isAvailable={seat.isAvailable}/>
+    ));
 
-    while(i<50){
-       i++;
-       buttons.push(i);
-    }
-
-    const buttonSeat = buttons.map(function (item, index){
-        return (
-         <button key={index}> {index+1} </button>
-        )
-    })
-
+    //  UI
     return(
         <>
             <h5>Selecione o(s) assento(s)</h5>
             <div className="containerSelectSession">
                 <div className="buttonsSeat"> 
-                    {buttonSeat}
+                    {session.length === 0 ? 'Carregando' : buttonSeat}  
                 </div>
                 <div className="buttonLabel"> 
                     {buttonLabel}
@@ -88,12 +106,11 @@ export default function SelectSession(){
                     <Link to="/sucesso">
                         <button className="bookSeat">Reservar Assento(s)</button> 
                     </Link>
-
             </div> 
             <Footer movieTitle={movieTitle} 
                     movieImg={movieImg} 
                     movieWeekday={movieWeekday} 
-                    movieDate={movieDate}/>
+                    movieHour={movieHour}/>
         </>
     )
 }

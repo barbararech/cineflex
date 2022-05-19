@@ -14,7 +14,6 @@ function Showtime({index, days}){
                 </Link>
             );
         })
-
         return(
             <>
                 <span>{weekday} - {date}</span>

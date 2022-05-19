@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import '../../assets/styles/reset.css'
-import '../App/style.css';
 
 import Header from "../Header/Header";
 import SelectMovie from "../SelectMovie/SelectMovie";
