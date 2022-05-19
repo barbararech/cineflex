@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./style.css";
 import Footer from "../Footer/Footer";
 
@@ -13,6 +15,25 @@ function Label(props){
 
 export default function SelectSession(){
     
+    const [movieTitle, setMovieTitle] = useState([]);  
+    const [movieImg, setMovieImg] = useState([]);  
+    const [movieWeekday, setMovieWeekday] = useState([]);  
+    const [movieDate, setMovieDate] = useState([]);  
+    const [session, setSession] = useState([]);
+    const  { id }  = useParams();
+
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${id}/seats`)
+    
+        promise.then((response) => {
+          setSession([response.data]);
+          setMovieTitle(`${response.data.movie.title}`);
+          setMovieImg(`${response.data.movie.posterURL}`);
+          setMovieWeekday(`${response.data.day.weekday}`);
+          setMovieDate(`${response.data.day.date}`);
+        })
+      }, []);
+
     //  Buttons labels
     const labels = [
         {
@@ -69,7 +90,10 @@ export default function SelectSession(){
                     </Link>
 
             </div> 
-        <Footer />
+            <Footer movieTitle={movieTitle} 
+                    movieImg={movieImg} 
+                    movieWeekday={movieWeekday} 
+                    movieDate={movieDate}/>
         </>
     )
 }

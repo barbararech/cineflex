@@ -6,31 +6,36 @@ import Footer from "../Footer/Footer";
 
 function Showtime({index, days}){
 
+    const daysMovies = days.map(({weekday, date, showtimes})=>{
+        const showtimeMovie = showtimes.map(({name, id})=>{
+            return(
+                <Link to={`/sessao/${id}`}>
+                    <button>{name}</button> 
+                </Link>
+            );
+        })
+
+        return(
+            <>
+                <span>{weekday} - {date}</span>
+                <div className="buttonsHour"> 
+                    {showtimeMovie}
+                </div>
+            </>
+        )
+    });
+
     return(
         <div className="containerSelectShowtime" key={index}>
-            {days.map(({weekday, date, showtimes})=>{
-                    return(
-                        <>
-                            <span>{weekday} - {date}</span>
-                            <div className="buttonsHour"> 
-                                {showtimes.map(({name, id})=>{
-                                    return(
-                                        <Link to={`/sessao/${id}`}>
-                                            <button>{name}</button> 
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        </>
-                    )
-                })
-            }
+            {daysMovies}
         </div>       
     )
 }
 
 export default function SelectShowtime(){
 
+    const [movieTitle, setMovieTitle] = useState([]);  
+    const [movieImg, setMovieImg] = useState([]);  
     const [movies, setMovies] = useState([]);
     const  { id }  = useParams();
 
@@ -39,10 +44,11 @@ export default function SelectShowtime(){
     
         promise.then((response) => {
           setMovies([response.data]);
+          setMovieTitle(`${response.data.title}`)
+          setMovieImg(`${response.data.posterURL}`)
         })
       }, []);
 
-      console.log(movies)
     const moviesShowtime = movies.map((movie,index) => 
        ( <Showtime title={movie.title} 
                   source={movie.posterURL} 
@@ -50,12 +56,12 @@ export default function SelectShowtime(){
                   id={movie.id} 
                   days={movie.days}/>));
     
- 
     return(
         <>
             <h5>Selecione o horário</h5>
             {movies.length === 0 ? 'Carregando' : moviesShowtime}        
-            <Footer />
+            <Footer movieTitle={movieTitle} 
+                    movieImg={movieImg} />
         </>
     )
 }
