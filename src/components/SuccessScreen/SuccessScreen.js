@@ -4,8 +4,6 @@ import "./style.css";
 export default function SuccessScreen(){
     const { state } = useLocation();
 
-    console.log(state)
-    console.log(state.bookingInfo)
     return(
         <>
             <div className="containerSuccessScreen">
@@ -20,8 +18,6 @@ export default function SuccessScreen(){
                                 <span key={index}>Assento {seat}</span>
                             );
                         })}
-                    {/* <span>Assento 15</span>
-                    <span>Assento 16</span> */}
                     <p>Comprador</p>
                     <span>Nome: {state.bookingInfo.costumer}</span>
                     <span>CPF: {state.bookingInfo.costumerCpf}</span>
