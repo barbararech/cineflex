@@ -38,6 +38,7 @@
 .containerSelectSession  .unavailable{
     background-color:#FBE192;
     border: 1px solid #F7C52B;
+    pointer-events: none;
 }
 
 .label{
