@@ -13,7 +13,7 @@ function Label({index, className, text}){
     )
 }
 
-function Seats({index, id, isAvailable, name, seatId, setSeatId}){
+function Seats({index, id, isAvailable, name, seatId, setSeatId, seatName, setSeatName}){
     const [buttonClassName, setButtonClassName] = useState(`${isAvailable ? "available" : "unavailable"}`);
 
     return (
@@ -22,48 +22,47 @@ function Seats({index, id, isAvailable, name, seatId, setSeatId}){
                 id={id} 
                 name={name} 
                 onClick={()=> {
-                    SaveInfoSeats(buttonClassName, seatId, setSeatId, id)
-                    SelectSeats(buttonClassName, setButtonClassName, id, seatId, setSeatId)                  
+                    SelectSeats(buttonClassName, setButtonClassName)
+                    SaveInfoSeats(buttonClassName, seatId, setSeatId, id, seatName, setSeatName, name)                  
                 }} 
             > {name} 
         </button>
     )
 }
 
-function SelectSeats(buttonClassName, setButtonClassName, seatId, setSeatId, id ){
+function SelectSeats(buttonClassName, setButtonClassName){
 
     if (buttonClassName === "available"){
         setButtonClassName("selected");
-        // setSeatId([...seatId, id]);
     } 
     if (buttonClassName === "selected"){
         setButtonClassName("available");
-        // let seatIdRemoved = seatId.filter(e => !seatId.includes(id));
-        // setSeatId(seatIdRemoved);
-        // console.log(seatIdRemoved)
     }
 }
-function SaveInfoSeats(buttonClassName, seatId, setSeatId, id){
+
+function SaveInfoSeats(buttonClassName, seatId, setSeatId, id, seatName, setSeatName, name){
     if(buttonClassName === "available"){
         setSeatId([...seatId, id]);
+        setSeatName([...seatName, name]);
     } else{
        let seatIdRemoved = [...seatId].filter(seat => !(seat === id));
        setSeatId(seatIdRemoved);
-       console.log([...seatId])
-       console.log(seatIdRemoved)
+       let seatNameRemoved = [...seatName].filter(seat => !(seat === name));
+       setSeatName(seatNameRemoved);
     }
 }
 
 export default function SelectSession(){
-    let navigate = useNavigate();
 
     const [movieTitle, setMovieTitle] = useState([]);  
     const [movieImg, setMovieImg] = useState([]);  
     const [movieWeekday, setMovieWeekday] = useState([]);  
+    const [movieDay, setMovieDay] = useState([]);  
     const [movieHour, setMovieHour] = useState([]);  
     const [movieSeats, setMovieSeats] = useState([]);  
     const [session, setSession] = useState([]);
-
+    
+    let navigate = useNavigate();
     const  { id }  = useParams();
 
     // API
@@ -76,6 +75,7 @@ export default function SelectSession(){
           setMovieTitle(`${response.data.movie.title}`);
           setMovieImg(`${response.data.movie.posterURL}`);
           setMovieWeekday(`${response.data.day.weekday}`);
+          setMovieDay(`${response.data.day.date}`);
           setMovieHour(`${response.data.name}`);
         })
       }, []);
@@ -102,20 +102,25 @@ export default function SelectSession(){
 
     //  Buttons seats
     const [seatId, setSeatId] = useState([]);
+    const [seatName, setSeatName] = useState([]);
+
     const buttonSeat = movieSeats.map((seat, index) => (
         <Seats key={index} 
                id={seat.id} 
                name={seat.name} 
                isAvailable={seat.isAvailable}
                seatId={seatId}
-               setSeatId={setSeatId}/>
+               setSeatId={setSeatId}
+               seatName={seatName}
+               setSeatName={setSeatName}
+               />
     ));
        
     // Form
     const [name, setName] = useState("");
 	const [cpf, setCpf] = useState("");
 
-    function Book (event) {
+    function Booking (event) {
 		event.preventDefault(); 
         if(seatId.length>0){
             const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", {
@@ -125,12 +130,19 @@ export default function SelectSession(){
             });
 
             promise.then((response)=>{
-                navigate("/sucesso");
+                let bookingInfo = {
+                    title: movieTitle,
+                    day: movieDay,
+                    hour: movieHour,
+                    seats: seatName,
+                    costumer: name,
+                    costumerCpf: cpf
+                };
+                navigate("/sucesso", {state: {bookingInfo}});
             })
         } else{
             alert("Selecione pelo menos um assento!");
         }
-
     }
 
     //  UI
@@ -144,7 +156,7 @@ export default function SelectSession(){
                 <div className="buttonLabel"> 
                     {buttonLabel}
                 </div>
-                <form onSubmit={Book}>
+                <form onSubmit={Booking}>
                     <div className="infoCostumer">
                         <span>Nome do Comprador:</span>
                         <input type="text" 
